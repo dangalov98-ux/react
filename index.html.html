@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pete - Frontend Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            padding: 40px;
+        }
+
+        /* Header Styles */
+        .header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* Projects Section */
+        .projects-section {
+            margin-bottom: 80px;
+        }
+
+        .projects-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #1e293b;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .projects-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(to right, #6366f1, #8b5cf6);
+            border-radius: 2px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.15);
+            border-color: #c7d2fe;
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #1e293b;
+        }
+
+        .project-card p {
+            color: #64748b;
+            margin-bottom: 25px;
+            flex-grow: 1;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .project-link {
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: #8b5cf6;
+        }
+
+        .project-link::after {
+            content: "→";
+            transition: transform 0.3s ease;
+        }
+
+        .project-link:hover::after {
+            transform: translateX(5px);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background-color: #f8fafc;
+            padding: 50px;
+            border-radius: 15px;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .contact-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #1e293b;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .contact-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(to right, #6366f1, #8b5cf6);
+            border-radius: 2px;
+        }
+
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #475569;
+            font-size: 1rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(to right, #6366f1, #8b5cf6);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Success Message */
+        .success-message {
+            background-color: #d1fae5;
+            color: #065f46;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            display: none;
+            align-items: center;
+            gap: 15px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .success-message i {
+            font-size: 1.8rem;
+        }
+
+        .success-message p {
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: #f1f5f9;
+            border-radius: 50%;
+            color: #64748b;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: #6366f1;
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* Error Styles */
+        .error {
+            border-color: #ef4444 !important;
+        }
+
+        .error:focus {
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2) !important;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .container {
+                padding: 30px;
+            }
+            
+            .header h1 {
+                font-size: 2.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            .header {
+                padding: 40px 20px;
+                margin-bottom: 40px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .projects-section h2,
+            .contact-section h2 {
+                font-size: 2rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-section {
+                padding: 30px;
+            }
+            
+            .social-links {
+                gap: 15px;
+            }
+            
+            .social-link {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .projects-section h2,
+            .contact-section h2 {
+                font-size: 1.7rem;
+            }
+            
+            .project-card {
+                padding: 20px;
+            }
+            
+            .submit-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <h1>Hello, I am Abdulloh!</h1>
+            <p class="subtitle">A frontend developer specialised in React</p>
+        </header>
+
+        <!-- Featured Projects Section -->
+        <section class="projects-section">
+            <h2>Featured Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <h3>React Space</h3>
+                    <p>Handy tool belt to create amazing AR components in a React app, with redux integration via middleware</p>
+                    <a href="#" class="project-link">See more →</a>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <h3>React Infinite Scroll</h3>
+                    <p>A scrollable bottom sheet with virtualisation support, native animations at 60 FPS and fully implemented in JS land</p>
+                    <a href="#" class="project-link">See more →</a>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <h3>Photo Gallery</h3>
+                    <p>A One-stop shop for photographers to share and monetize their photos, allowing them to have a second source of income</p>
+                    <a href="#" class="project-link">See more →</a>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="project-card">
+                    <h3>Event planner</h3>
+                    <p>A mobile application for leisure seekers to discover unique events and activities in their city with a few taps</p>
+                    <a href="#" class="project-link">See more →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form Section -->
+        <section class="contact-section">
+            <h2>Contact me</h2>
+            <form id="contactForm" class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Your email address" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="enquiry">Type of enquiry</label>
+                    <select id="enquiry" name="enquiry" required>
+                        <option value="" disabled selected>Select enquiry type</option>
+                        <option value="freelance">Freelance Project</option>
+                        <option value="collaboration">Collaboration</option>
+                        <option value="job">Job Opportunity</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Your message</label>
+                    <textarea id="message" name="message" rows="5" placeholder="Your message here..." required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <span>Submit</span>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+            
+            <!-- Success Message -->
+            <div id="successMessage" class="success-message">
+                <i class="fas fa-check-circle"></i>
+                <p>Thank you! Your message has been sent successfully.</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-codepen"></i></a>
+            </div>
+            <p class="copyright">© 2024 Pete's Portfolio. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form elements
+            const contactForm = document.getElementById('contactForm');
+            const successMessage = document.getElementById('successMessage');
+            const submitBtn = document.querySelector('.submit-btn');
+            
+            // Project cards animation on scroll
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            // Form submission handler
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const formData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    enquiry: document.getElementById('enquiry').value,
+                    message: document.getElementById('message').value
+                };
+                
+                // Validate form
+                if (validateForm(formData)) {
+                    // Show loading state
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                    submitBtn.disabled = true;
+                    
+                    // Simulate form submission (in real app, you would send to a server)
+                    setTimeout(function() {
+                        // Show success message
+                        successMessage.style.display = 'flex';
+                        
+                        // Reset form
+                        contactForm.reset();
+                        
+                        // Reset button
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                        
+                        // Hide success message after 5 seconds
+                        setTimeout(function() {
+                            successMessage.style.display = 'none';
+                        }, 5000);
+                        
+                        // Log form data to console (for demo)
+                        console.log('Form submitted:', formData);
+                    }, 1500);
+                }
+            });
+            
+            // Form validation function
+            function validateForm(data) {
+                // Reset previous errors
+                clearErrors();
+                
+                let isValid = true;
+                
+                // Check name
+                if (!data.name.trim()) {
+                    showError('name', 'Name is required');
+                    isValid = false;
+                }
+                
+                // Check email
+                if (!data.email.trim()) {
+                    showError('email', 'Email is required');
+                    isValid = false;
+                } else if (!isValidEmail(data.email)) {
+                    showError('email', 'Please enter a valid email address');
+                    isValid = false;
+                }
+                
+                // Check enquiry type
+                if (!data.enquiry) {
+                    showError('enquiry', 'Please select an enquiry type');
+                    isValid = false;
+                }
+                
+                // Check message
+                if (!data.message.trim()) {
+                    showError('message', 'Message is required');
+                    isValid = false;
+                } else if (data.message.trim().length < 10) {
+                    showError('message', 'Message must be at least 10 characters long');
+                    isValid = false;
+                }
+                
+                return isValid;
+            }
+            
+            // Email validation function
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+            
+            // Show error function
+            function showError(fieldId, message) {
+                const field = document.getElementById(fieldId);
+                const formGroup = field.closest('.form-group');
+                
+                // Add error class to input
+                field.classList.add('error');
+                
+                // Create error message element
+                let errorElement = formGroup.querySelector('.error-message');
+                
+                if (!errorElement) {
+                    errorElement = document.createElement('div');
+                    errorElement.className = 'error-message';
+                    formGroup.appendChild(errorElement);
+                }
+                
+                errorElement.textContent = message;
+            }
+            
+            // Clear errors function
+            function clearErrors() {
+                // Remove error classes
+                const errorFields = document.querySelectorAll('.error');
+                errorFields.forEach(field => {
+                    field.classList.remove('error');
+                });
+                
+                // Remove error messages
+                const errorMessages = document.querySelectorAll('.error-message');
+                errorMessages.forEach(message => {
+                    message.remove();
+                });
+            }
+            
+            // Project cards animation on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Apply initial styles for animation
+            projectCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                card.style.transitionDelay = `${index * 0.1}s`;
+                
+                observer.observe(card);
+            });
+            
+            // Social links hover effect enhancement
+            const socialLinks = document.querySelectorAll('.social-link');
+            
+            socialLinks.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.1)';
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+            
+            // Form input focus effects
+            const formInputs = document.querySelectorAll('.form-group input, .form-group select, .form-group textarea');
+            
+            formInputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.transform = 'translateY(-2px)';
+                    this.parentElement.style.transition = 'transform 0.3s ease';
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
